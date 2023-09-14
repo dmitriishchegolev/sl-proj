@@ -32,7 +32,9 @@ export class BredcrumbsComponent {
     childrens.forEach((routes: ActivatedRoute) => {
       if (routes.routeConfig && routes.routeConfig.title) {
         let label = routes.routeConfig.title;
-        if (routes.snapshot.params && routes.snapshot.params['id']) {
+        if (routes.snapshot.data['breadcrumbsLabel']) {
+          label = routes.snapshot.data['breadcrumbsLabel'];
+        } else if (routes.snapshot.params && routes.snapshot.params['id']) {
           path += `/${routes.snapshot.params['id']}`;
           label += ` ${routes.snapshot.params['id']}`;
         } else {

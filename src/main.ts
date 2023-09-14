@@ -11,6 +11,7 @@ import { AuthGuard } from './app/auth.guard';
 import { inject } from '@angular/core';
 import { UserService } from './app/user.service';
 import { RegisterComponent } from './app/pages/register/register.component';
+import { map, timer } from 'rxjs';
 
 const routes: Routes = [
   {
@@ -26,6 +27,16 @@ const routes: Routes = [
       },
       {
         path: 'register',
+        canActivate: [
+          () => false,
+          () =>
+            timer(2000).pipe(
+              map(() => {
+                debugger;
+                return true;
+              })
+            ),
+        ],
         canDeactivate: [
           (component: RegisterComponent) => {
             if (component.form.dirty) {
@@ -47,6 +58,16 @@ const routes: Routes = [
           (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>
             inject(UserService).isLoggined(),
         ],
+        loadComponent: () =>
+          import('./app/pages/lk/lk.component').then((c) => c.LkComponent),
+      },
+      {
+        path: 'user/:id',
+        title: 'Юзер',
+        resolve: {
+          breadcrumbsLabel: (route: ActivatedRouteSnapshot) =>
+            'Игорь ' + route.paramMap.get('id'),
+        },
         loadComponent: () =>
           import('./app/pages/lk/lk.component').then((c) => c.LkComponent),
       },
