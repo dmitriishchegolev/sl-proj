@@ -17,7 +17,13 @@ const routes: Routes = [
   },
   {
     path: 'lk',
+    canMatch: [() => false],
     loadChildren: () => import('./pages/lk/lk.module').then((m) => m.LkModule),
+  },
+  {
+    path: '**',
+    loadChildren: () =>
+      import('./pages/ads/list/list.module').then((m) => m.ListModule),
   },
   {
     path: 'ads',
