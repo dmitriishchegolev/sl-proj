@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './pages/main/main.component';
-import { LkComponent } from './pages/lk/lk.component';
+import AuthGuard from './shared/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -17,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'lk',
-    canMatch: [() => false],
+    canActivate: [AuthGuard],
     loadChildren: () => import('./pages/lk/lk.module').then((m) => m.LkModule),
   },
   {
