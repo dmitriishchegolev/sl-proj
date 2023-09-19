@@ -2,13 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LkRoutingModule } from './lk-routing.module';
-
+import { LkComponent } from './lk.component';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    LkRoutingModule
-  ]
+  declarations: [LkComponent],
+  imports: [CommonModule, LkRoutingModule],
 })
-export class LkModule { }
+export class LkModule {}
